@@ -5,8 +5,6 @@ def create
     hero_power = HeroPower.create!(hero_power_params) 
     render json: hero, serializer:
     SingleheroSerializer
-    rescue ActiveRecord::RecordInvalid => invalid
-     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
 
 end
 
