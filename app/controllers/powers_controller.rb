@@ -1,4 +1,5 @@
 class PowersController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     skip_before_action :verify_authenticity_token
     
     def index
@@ -30,6 +31,10 @@ class PowersController < ApplicationController
     def find_power_id
         Power.find(params[:id])
     end
+
+    def render_not_found_response
+        render json: { error: "Power not found" }, status: :not_found
+     end
 
 
 
